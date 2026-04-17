@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jay Phan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./index.html">Jay Phan</a>
+    <nav>
+      <a href="./index.html" class="active">About</a>
+      <a href="./blog.html">Blog</a>
+    </nav>
+  </header>
+
+  <main class="container about">
+    <section class="hero">
+      <img class="avatar" src="assets/profile.jpg" alt="Jay Phan" onerror="this.src='assets/profile-placeholder.svg'" />
+      <div>
+        <p class="lede">I want to do a lot of things but also nothing at the same time.</p>
+      </div>
+    </section>
+
+    <section class="bio">
+      <p>
+        Right now I just like to learn about random things. I try to write about them as notes
+        to myself in the future, but also think some people might find them interesting.
+      </p>
+      <p>
+        You can read more here <a href="./blog.html">blog</a>.
+      </p>
+    </section>
+
+    <section class="experience">
+      <h2>Experience</h2>
+
+      <article class="job">
+        <h3>Citadel <span class="team">· Core Trading Platform</span></h3>
+        <p>Worked on the sequencer system — a fancy message bus that powers the firm's entire trading stack.</p>
+      </article>
+
+      <article class="job">
+        <h3>Citadel Securities <span class="team">· Real Time Trading</span></h3>
+        <p>Improved the core historical market data reader library used by almost every researcher and trader at the firm (and also the backtest framework).</p>
+      </article>
+
+      <article class="job">
+        <h3>DRW Trading <span class="team">· Low Latency Network</span></h3>
+        <p>Analyzed FCC radio-frequency datasets to map what HFT firms were doing with their RF effort — my first intro to HFT.</p>
+      </article>
+
+      <article class="job">
+        <h3>ESPN Bet (theScore) <span class="team">· Site Reliability</span></h3>
+        <p>Kept cloud and on-prem infra healthy through Super Bowl traffic.</p>
+      </article>
+
+      <article class="job">
+        <h3>Enzuzo <span class="team">· Product Engineering</span></h3>
+        <p>Built Go and React features for advanced customization and multi-user management.</p>
+      </article>
+    </section>
+
+    <section class="contact">
+      <p class="links">
+        <a href="https://www.linkedin.com/in/jay-pphan/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>·</span>
+        <a href="mailto:jbphan@uwaterloo.ca">jbphan@uwaterloo.ca</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Jay Phan</span>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

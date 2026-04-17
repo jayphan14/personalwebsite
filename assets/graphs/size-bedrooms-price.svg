@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="600" height="400" fill="#ffffff"/>
+
+  <text x="300" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">House size + bedrooms vs. price</text>
+
+  <!-- fitted plane (semi-transparent green quad)
+       corners (s,b,p) projected:
+       (0,0,0.1)=(170,310)   (1,0,0.6)=(540,190)   (1,1,1.0)=(410,90)   (0,1,0.5)=(40,210) -->
+  <polygon points="170,310 540,190 410,90 40,210" fill="#0b6d5a" fill-opacity="0.14" stroke="#0b6d5a" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- axes: origin at (170, 340) -->
+  <!-- size axis (right-down) -->
+  <line x1="170" y1="340" x2="540" y2="370" stroke="#444" stroke-width="1.3" marker-end="url(#arr)"/>
+  <!-- beds axis (left-down, into page) -->
+  <line x1="170" y1="340" x2="40"  y2="360" stroke="#444" stroke-width="1.3" marker-end="url(#arr)"/>
+  <!-- price axis (up) -->
+  <line x1="170" y1="340" x2="170" y2="40"  stroke="#444" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- axis labels -->
+  <text x="550" y="385" font-size="12" fill="#555">size</text>
+  <text x="14"  y="372" font-size="12" fill="#555">bedrooms</text>
+  <text x="178" y="40"  font-size="12" fill="#555">price</text>
+
+  <!-- scatter points with simple drop-stems for depth cue -->
+  <g stroke="#777" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6">
+    <line x1="205" y1="277" x2="205" y2="333"/>
+    <line x1="292" y1="230" x2="292" y2="352"/>
+    <line x1="203" y1="226" x2="203" y2="352"/>
+    <line x1="340" y1="162" x2="340" y2="358"/>
+    <line x1="264" y1="159" x2="264" y2="363"/>
+    <line x1="427" y1="130" x2="427" y2="366"/>
+    <line x1="325" y1="101" x2="325" y2="373"/>
+    <line x1="425" y1="94"  x2="425" y2="370"/>
+    <line x1="235" y1="205" x2="235" y2="359"/>
+    <line x1="339" y1="124" x2="339" y2="370"/>
+  </g>
+
+  <g fill="#0b6d5a">
+    <circle cx="205" cy="277" r="4.5"/>
+    <circle cx="292" cy="230" r="4.5"/>
+    <circle cx="203" cy="226" r="4.5"/>
+    <circle cx="340" cy="162" r="4.5"/>
+    <circle cx="264" cy="159" r="4.5"/>
+    <circle cx="427" cy="130" r="4.5"/>
+    <circle cx="325" cy="101" r="4.5"/>
+    <circle cx="425" cy="94"  r="4.5"/>
+    <circle cx="235" cy="205" r="4.5"/>
+    <circle cx="339" cy="124" r="4.5"/>
+  </g>
+
+  <!-- caption -->
+  <text x="300" y="392" text-anchor="middle" font-size="11" fill="#888">the best-fit "line" becomes a plane in 2 feature dimensions</text>
+</svg>

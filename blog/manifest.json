@@ -1,0 +1,15 @@
+{
+  "sections": [
+    {
+      "title": "Machine Learning",
+      "posts": [
+        {
+          "slug": "why-squared-error",
+          "title": "Why Squared Error? A Statistical View of Linear Regression",
+          "date": "2026-04-17",
+          "path": "blog/ml/why-squared-error.md"
+        }
+      ]
+    }
+  ]
+}

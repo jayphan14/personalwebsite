@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Jay Phan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./index.html">Jay Phan</a>
+    <nav>
+      <a href="./index.html">About</a>
+      <a href="./blog.html" class="active">Blog</a>
+    </nav>
+  </header>
+
+  <main class="container blog-index">
+    <h1>Blog</h1>
+    <p class="muted">Notes on machine learning, software, and whatever else I'm chewing on.</p>
+    <div id="sections"></div>
+    <p id="empty" class="muted" hidden>No posts yet.</p>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Jay Phan</span>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="js/blog-index.js"></script>
+</body>
+</html>
