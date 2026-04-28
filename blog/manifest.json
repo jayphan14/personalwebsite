@@ -10,6 +10,17 @@
           "path": "blog/ml/why-squared-error.md"
         }
       ]
+    },
+    {
+      "title": "C++ Talk Summary and Review",
+      "posts": [
+        {
+          "slug": "lock-free-and-ipc-queues",
+          "title": "Lock-free FIFOs (Frasch, CppCon 2023) + Robust IPC Queues (Hagins, C++ on Sea 2025)",
+          "date": "2025-10-04",
+          "path": "blog/talks/lock-free-and-ipc-queues.md"
+        }
+      ]
     }
   ]
 }
