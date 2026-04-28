@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 360" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="700" height="360" fill="#ffffff"/>
+
+  <text x="350" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">A typical HFT system, end to end</text>
+
+  <!-- Exchange (left) -->
+  <g>
+    <rect x="30" y="130" width="110" height="80" rx="6" fill="#fafaf7" stroke="#444" stroke-width="1.2"/>
+    <text x="85" y="165" text-anchor="middle" font-size="13" font-weight="600" fill="#333">Exchange</text>
+    <text x="85" y="183" text-anchor="middle" font-size="11" fill="#666">matching engine</text>
+  </g>
+
+  <!-- Feed Handler -->
+  <g>
+    <rect x="190" y="60" width="140" height="70" rx="6" fill="#ffffff" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="260" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Feed Handler</text>
+    <text x="260" y="108" text-anchor="middle" font-size="11" fill="#666">decode, normalize</text>
+    <text x="260" y="122" text-anchor="middle" font-size="11" fill="#666">build book</text>
+  </g>
+
+  <!-- Strategy -->
+  <g>
+    <rect x="380" y="60" width="140" height="70" rx="6" fill="#ffffff" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="450" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Strategy</text>
+    <text x="450" y="108" text-anchor="middle" font-size="11" fill="#666">signal, sizing,</text>
+    <text x="450" y="122" text-anchor="middle" font-size="11" fill="#666">decision</text>
+  </g>
+
+  <!-- OMS / Risk -->
+  <g>
+    <rect x="380" y="220" width="140" height="70" rx="6" fill="#ffffff" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="450" y="250" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">OMS + Risk</text>
+    <text x="450" y="268" text-anchor="middle" font-size="11" fill="#666">limits, position,</text>
+    <text x="450" y="282" text-anchor="middle" font-size="11" fill="#666">kill switch</text>
+  </g>
+
+  <!-- Order Gateway -->
+  <g>
+    <rect x="190" y="220" width="140" height="70" rx="6" fill="#ffffff" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="260" y="250" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Order Gateway</text>
+    <text x="260" y="268" text-anchor="middle" font-size="11" fill="#666">encode, send,</text>
+    <text x="260" y="282" text-anchor="middle" font-size="11" fill="#666">handle ack/fill</text>
+  </g>
+
+  <!-- Logging / Telemetry -->
+  <g>
+    <rect x="560" y="130" width="120" height="80" rx="6" fill="#fafaf7" stroke="#888" stroke-width="1.1" stroke-dasharray="4 3"/>
+    <text x="620" y="165" text-anchor="middle" font-size="12" font-weight="600" fill="#666">Telemetry</text>
+    <text x="620" y="182" text-anchor="middle" font-size="11" fill="#888">async log, metrics</text>
+  </g>
+
+  <!-- arrow defs -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0b6d5a"/>
+    </marker>
+    <marker id="arrGrey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- Exchange -> Feed Handler (market data) -->
+  <line x1="140" y1="160" x2="186" y2="95" stroke="#0b6d5a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="148" y="125" font-size="10" fill="#0b6d5a">market data</text>
+
+  <!-- Feed Handler -> Strategy -->
+  <line x1="330" y1="95" x2="378" y2="95" stroke="#0b6d5a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Strategy -> OMS/Risk (intent) -->
+  <line x1="450" y1="130" x2="450" y2="218" stroke="#0b6d5a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="456" y="180" font-size="10" fill="#0b6d5a">intent</text>
+
+  <!-- OMS -> Gateway (approved order) -->
+  <line x1="378" y1="255" x2="332" y2="255" stroke="#0b6d5a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Gateway -> Exchange -->
+  <line x1="190" y1="240" x2="142" y2="200" stroke="#0b6d5a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="146" y="232" font-size="10" fill="#0b6d5a">orders</text>
+
+  <!-- Telemetry taps (dashed) -->
+  <line x1="520" y1="95"  x2="560" y2="150" stroke="#888" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="520" y1="255" x2="560" y2="195" stroke="#888" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- caption -->
+  <text x="350" y="335" text-anchor="middle" font-size="11" fill="#666">market data flows in on top, orders flow out on the bottom (same NIC, different paths)</text>
+</svg>
