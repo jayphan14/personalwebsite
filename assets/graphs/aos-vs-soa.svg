@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="320" fill="#ffffff"/>
+
+  <text x="360" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="#333">AoS vs SoA: cache line utilisation when a hot loop reads one field</text>
+
+  <!-- AoS section -->
+  <text x="60" y="52" font-size="13" font-weight="600" fill="#333">Array of Structs</text>
+  <text x="60" y="68" font-size="11" fill="#666">struct P { float x, y, z; int id; }; P particles[N];</text>
+  <text x="60" y="84" font-size="11" fill="#888">loop reads only x, but y, z, id come along as bycatch</text>
+
+  <!-- AoS cells: 4 particles, 4 fields each = 16 cells = 576 px (cell width 36) -->
+  <g font-size="11">
+    <rect x="60"  y="98" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="78"  y="114" text-anchor="middle" fill="#fff">x</text>
+    <rect x="96"  y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="114" y="114" text-anchor="middle" fill="#999">y</text>
+    <rect x="132" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="150" y="114" text-anchor="middle" fill="#999">z</text>
+    <rect x="168" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="186" y="114" text-anchor="middle" fill="#999">id</text>
+
+    <rect x="204" y="98" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="222" y="114" text-anchor="middle" fill="#fff">x</text>
+    <rect x="240" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="258" y="114" text-anchor="middle" fill="#999">y</text>
+    <rect x="276" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="294" y="114" text-anchor="middle" fill="#999">z</text>
+    <rect x="312" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="330" y="114" text-anchor="middle" fill="#999">id</text>
+
+    <rect x="348" y="98" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="366" y="114" text-anchor="middle" fill="#fff">x</text>
+    <rect x="384" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="402" y="114" text-anchor="middle" fill="#999">y</text>
+    <rect x="420" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="438" y="114" text-anchor="middle" fill="#999">z</text>
+    <rect x="456" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="474" y="114" text-anchor="middle" fill="#999">id</text>
+
+    <rect x="492" y="98" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="510" y="114" text-anchor="middle" fill="#fff">x</text>
+    <rect x="528" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="546" y="114" text-anchor="middle" fill="#999">y</text>
+    <rect x="564" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="582" y="114" text-anchor="middle" fill="#999">z</text>
+    <rect x="600" y="98" width="36" height="22" fill="#f0f0eb" stroke="#444"/>
+    <text x="618" y="114" text-anchor="middle" fill="#999">id</text>
+  </g>
+
+  <!-- AoS cache line indicator -->
+  <line x1="60" y1="128" x2="636" y2="128" stroke="#d4506b" stroke-width="2"/>
+  <line x1="60" y1="124" x2="60" y2="132" stroke="#d4506b" stroke-width="2"/>
+  <line x1="636" y1="124" x2="636" y2="132" stroke="#d4506b" stroke-width="2"/>
+  <text x="348" y="146" text-anchor="middle" font-size="11" fill="#d4506b">one 64-byte cache line, only 4 of 16 floats are useful</text>
+
+  <!-- SoA section -->
+  <text x="60" y="180" font-size="13" font-weight="600" fill="#333">Struct of Arrays</text>
+  <text x="60" y="196" font-size="11" fill="#666">float xs[N], ys[N], zs[N]; int ids[N];</text>
+  <text x="60" y="212" font-size="11" fill="#888">same loop reads only x, every byte in the line is useful</text>
+
+  <!-- SoA cells: 16 x values -->
+  <g font-size="11">
+    <rect x="60"  y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="78"  y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="96"  y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="114" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="132" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="150" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="168" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="186" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="204" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="222" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="240" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="258" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="276" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="294" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="312" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="330" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="348" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="366" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="384" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="402" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="420" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="438" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="456" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="474" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="492" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="510" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="528" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="546" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="564" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="582" y="242" text-anchor="middle" fill="#fff">x</text>
+    <rect x="600" y="226" width="36" height="22" fill="#0b6d5a" stroke="#444"/>
+    <text x="618" y="242" text-anchor="middle" fill="#fff">x</text>
+  </g>
+
+  <!-- SoA cache line indicator -->
+  <line x1="60" y1="256" x2="636" y2="256" stroke="#0b6d5a" stroke-width="2"/>
+  <line x1="60" y1="252" x2="60" y2="260" stroke="#0b6d5a" stroke-width="2"/>
+  <line x1="636" y1="252" x2="636" y2="260" stroke="#0b6d5a" stroke-width="2"/>
+  <text x="348" y="274" text-anchor="middle" font-size="11" fill="#0b6d5a">one 64-byte cache line, all 16 floats are useful</text>
+
+  <text x="360" y="300" text-anchor="middle" font-size="10" fill="#888">SoA also vectorises naturally: 16 contiguous x values fit one wide SIMD register</text>
+</svg>

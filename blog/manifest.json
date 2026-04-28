@@ -10,6 +10,17 @@
           "path": "blog/ml/why-squared-error.md"
         }
       ]
+    },
+    {
+      "title": "C++ Talk Summary and Review",
+      "posts": [
+        {
+          "slug": "most-important-optimizations",
+          "title": "The Most Important Optimizations (Jan Bielak, CppCon 2022)",
+          "date": "2025-08-23",
+          "path": "blog/talks/most-important-optimizations.md"
+        }
+      ]
     }
   ]
 }
