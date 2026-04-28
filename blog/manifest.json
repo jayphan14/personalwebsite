@@ -10,6 +10,17 @@
           "path": "blog/ml/why-squared-error.md"
         }
       ]
+    },
+    {
+      "title": "Book Reviews",
+      "posts": [
+        {
+          "slug": "effective-modern-cpp",
+          "title": "Effective Modern C++",
+          "date": "2025-09-29",
+          "path": "blog/books/effective-modern-cpp.md"
+        }
+      ]
     }
   ]
 }
