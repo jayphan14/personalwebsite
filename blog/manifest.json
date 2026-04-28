@@ -36,6 +36,12 @@
           "title": "When Nanoseconds Matter (David Gross, CppCon 2024)",
           "date": "2025-08-09",
           "path": "blog/talks/when-nanoseconds-matter.md"
+        },
+        {
+          "slug": "microsecond-eternity",
+          "title": "When a Microsecond Is an Eternity (Carl Cook, CppCon 2017)",
+          "date": "2025-08-16",
+          "path": "blog/talks/microsecond-eternity.md"
         }
       ]
     }
