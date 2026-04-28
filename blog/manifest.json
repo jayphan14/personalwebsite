@@ -27,6 +27,17 @@
           "path": "blog/books/developing-hft-systems.md"
         }
       ]
+    },
+    {
+      "title": "C++ Talk Summary and Review",
+      "posts": [
+        {
+          "slug": "when-nanoseconds-matter",
+          "title": "When Nanoseconds Matter (David Gross, CppCon 2024)",
+          "date": "2025-08-09",
+          "path": "blog/talks/when-nanoseconds-matter.md"
+        }
+      ]
     }
   ]
 }
