@@ -42,6 +42,12 @@
           "title": "When a Microsecond Is an Eternity (Carl Cook, CppCon 2017)",
           "date": "2025-08-16",
           "path": "blog/talks/microsecond-eternity.md"
+        },
+        {
+          "slug": "most-important-optimizations",
+          "title": "The Most Important Optimizations (Jan Bielak, CppCon 2022)",
+          "date": "2025-08-23",
+          "path": "blog/talks/most-important-optimizations.md"
         }
       ]
     }
