@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="320" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">The "always running" pattern (Cook, 2017)</text>
+
+  <!-- Track 1: Naive -->
+  <text x="60" y="58" font-size="13" font-weight="600" fill="#333">Naive: run the strategy only when triggered</text>
+  <text x="60" y="74" font-size="11" fill="#888">cache goes cold between events, every interesting tick pays the misses</text>
+
+  <!-- cache temperature bar (cold base, warm spikes) -->
+  <rect x="60" y="86" width="600" height="14" fill="#cfe1f3"/>
+  <rect x="160" y="86" width="34" height="14" fill="#f0a8a8"/>
+  <rect x="320" y="86" width="34" height="14" fill="#f0a8a8"/>
+  <rect x="496" y="86" width="34" height="14" fill="#f0a8a8"/>
+
+  <!-- timeline -->
+  <line x1="60" y1="124" x2="660" y2="124" stroke="#444" stroke-width="1.2"/>
+
+  <!-- trigger events as dots + label -->
+  <g>
+    <circle cx="177" cy="124" r="5" fill="#0b6d5a"/>
+    <circle cx="337" cy="124" r="5" fill="#0b6d5a"/>
+    <circle cx="513" cy="124" r="5" fill="#0b6d5a"/>
+  </g>
+  <text x="177" y="142" text-anchor="middle" font-size="10" fill="#666">tick → run → send</text>
+  <text x="337" y="142" text-anchor="middle" font-size="10" fill="#666">tick → run → send</text>
+  <text x="513" y="142" text-anchor="middle" font-size="10" fill="#666">tick → run → send</text>
+
+  <!-- legend for cache bar -->
+  <g font-size="10" fill="#666">
+    <rect x="60" y="156" width="10" height="10" fill="#cfe1f3"/>
+    <text x="76" y="165">cache cold</text>
+    <rect x="150" y="156" width="10" height="10" fill="#f0a8a8"/>
+    <text x="166" y="165">cache warm</text>
+  </g>
+
+  <!-- Track 2: Cook -->
+  <text x="60" y="200" font-size="13" font-weight="600" fill="#333">Cook: run the strategy on every tick, gate the send at the end</text>
+  <text x="60" y="216" font-size="11" fill="#888">cache stays warm continuously, real sends are a one-instruction branch at the exit</text>
+
+  <!-- cache temperature bar (all warm) -->
+  <rect x="60" y="228" width="600" height="14" fill="#f0a8a8"/>
+
+  <!-- timeline -->
+  <line x1="60" y1="266" x2="660" y2="266" stroke="#444" stroke-width="1.2"/>
+
+  <!-- continuous run (small grey boxes) -->
+  <g fill="#bbb">
+    <rect x="65"  y="262" width="10" height="8"/>
+    <rect x="80"  y="262" width="10" height="8"/>
+    <rect x="95"  y="262" width="10" height="8"/>
+    <rect x="110" y="262" width="10" height="8"/>
+    <rect x="125" y="262" width="10" height="8"/>
+    <rect x="140" y="262" width="10" height="8"/>
+    <rect x="155" y="262" width="10" height="8"/>
+    <rect x="195" y="262" width="10" height="8"/>
+    <rect x="210" y="262" width="10" height="8"/>
+    <rect x="225" y="262" width="10" height="8"/>
+    <rect x="240" y="262" width="10" height="8"/>
+    <rect x="255" y="262" width="10" height="8"/>
+    <rect x="270" y="262" width="10" height="8"/>
+    <rect x="285" y="262" width="10" height="8"/>
+    <rect x="300" y="262" width="10" height="8"/>
+    <rect x="315" y="262" width="10" height="8"/>
+    <rect x="355" y="262" width="10" height="8"/>
+    <rect x="370" y="262" width="10" height="8"/>
+    <rect x="385" y="262" width="10" height="8"/>
+    <rect x="400" y="262" width="10" height="8"/>
+    <rect x="415" y="262" width="10" height="8"/>
+    <rect x="430" y="262" width="10" height="8"/>
+    <rect x="445" y="262" width="10" height="8"/>
+    <rect x="460" y="262" width="10" height="8"/>
+    <rect x="475" y="262" width="10" height="8"/>
+    <rect x="490" y="262" width="10" height="8"/>
+    <rect x="530" y="262" width="10" height="8"/>
+    <rect x="545" y="262" width="10" height="8"/>
+    <rect x="560" y="262" width="10" height="8"/>
+    <rect x="575" y="262" width="10" height="8"/>
+    <rect x="590" y="262" width="10" height="8"/>
+    <rect x="605" y="262" width="10" height="8"/>
+    <rect x="620" y="262" width="10" height="8"/>
+    <rect x="635" y="262" width="10" height="8"/>
+    <rect x="650" y="262" width="10" height="8"/>
+  </g>
+
+  <!-- real sends (green dots, same positions as track 1) -->
+  <circle cx="177" cy="266" r="5" fill="#0b6d5a"/>
+  <circle cx="337" cy="266" r="5" fill="#0b6d5a"/>
+  <circle cx="513" cy="266" r="5" fill="#0b6d5a"/>
+
+  <!-- legend -->
+  <g font-size="10" fill="#666">
+    <rect x="60" y="294" width="10" height="8" fill="#bbb"/>
+    <text x="76" y="302">strategy runs (suppressed send)</text>
+    <circle cx="244" cy="298" r="4" fill="#0b6d5a"/>
+    <text x="252" y="302">real send</text>
+  </g>
+</svg>

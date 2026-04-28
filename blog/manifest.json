@@ -10,6 +10,17 @@
           "path": "blog/ml/why-squared-error.md"
         }
       ]
+    },
+    {
+      "title": "C++ Talk Summary and Review",
+      "posts": [
+        {
+          "slug": "microsecond-eternity",
+          "title": "When a Microsecond Is an Eternity (Carl Cook, CppCon 2017)",
+          "date": "2025-08-16",
+          "path": "blog/talks/microsecond-eternity.md"
+        }
+      ]
     }
   ]
 }
