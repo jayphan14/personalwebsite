@@ -19,6 +19,12 @@
           "title": "Effective Modern C++",
           "date": "2025-09-29",
           "path": "blog/books/effective-modern-cpp.md"
+        },
+        {
+          "slug": "developing-hft-systems",
+          "title": "Developing High-Frequency Trading Systems",
+          "date": "2025-05-20",
+          "path": "blog/books/developing-hft-systems.md"
         }
       ]
     }

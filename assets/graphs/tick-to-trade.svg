@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="320" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">Tick-to-trade: where the microseconds go</text>
+
+  <!-- timeline axis -->
+  <line x1="50" y1="180" x2="670" y2="180" stroke="#444" stroke-width="1.3"/>
+
+  <!-- stages: x positions -->
+  <!-- stage box helper -->
+  <g font-size="11" fill="#333">
+
+    <!-- 1. NIC RX -->
+    <rect x="50" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="90" y="152" text-anchor="middle" font-weight="600">NIC RX</text>
+    <text x="90" y="167" text-anchor="middle" fill="#666">~1 µs</text>
+
+    <!-- 2. Decode -->
+    <rect x="140" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="180" y="152" text-anchor="middle" font-weight="600">Decode</text>
+    <text x="180" y="167" text-anchor="middle" fill="#666">~0.5 µs</text>
+
+    <!-- 3. Book update -->
+    <rect x="230" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="270" y="152" text-anchor="middle" font-weight="600">Book</text>
+    <text x="270" y="167" text-anchor="middle" fill="#666">~0.5 µs</text>
+
+    <!-- 4. Strategy -->
+    <rect x="320" y="135" width="80" height="40" rx="4" fill="#ffffff" stroke="#d4506b" stroke-width="1.4"/>
+    <text x="360" y="152" text-anchor="middle" font-weight="600" fill="#d4506b">Strategy</text>
+    <text x="360" y="167" text-anchor="middle" fill="#666">~1-5 µs</text>
+
+    <!-- 5. Risk -->
+    <rect x="410" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="450" y="152" text-anchor="middle" font-weight="600">Risk</text>
+    <text x="450" y="167" text-anchor="middle" fill="#666">~0.5 µs</text>
+
+    <!-- 6. Encode -->
+    <rect x="500" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="540" y="152" text-anchor="middle" font-weight="600">Encode</text>
+    <text x="540" y="167" text-anchor="middle" fill="#666">~0.5 µs</text>
+
+    <!-- 7. NIC TX -->
+    <rect x="590" y="135" width="80" height="40" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.2"/>
+    <text x="630" y="152" text-anchor="middle" font-weight="600">NIC TX</text>
+    <text x="630" y="167" text-anchor="middle" fill="#666">~1 µs</text>
+  </g>
+
+  <!-- arrows between stages -->
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+  <g stroke="#888" stroke-width="1">
+    <line x1="130" y1="155" x2="138" y2="155" marker-end="url(#arr2)"/>
+    <line x1="220" y1="155" x2="228" y2="155" marker-end="url(#arr2)"/>
+    <line x1="310" y1="155" x2="318" y2="155" marker-end="url(#arr2)"/>
+    <line x1="400" y1="155" x2="408" y2="155" marker-end="url(#arr2)"/>
+    <line x1="490" y1="155" x2="498" y2="155" marker-end="url(#arr2)"/>
+    <line x1="580" y1="155" x2="588" y2="155" marker-end="url(#arr2)"/>
+  </g>
+
+  <!-- Caller labels under timeline -->
+  <text x="90"  y="210" text-anchor="middle" font-size="10" fill="#666">kernel bypass</text>
+  <text x="180" y="210" text-anchor="middle" font-size="10" fill="#666">parse wire fmt</text>
+  <text x="270" y="210" text-anchor="middle" font-size="10" fill="#666">L2/L3 update</text>
+  <text x="360" y="210" text-anchor="middle" font-size="10" fill="#d4506b">where alpha lives</text>
+  <text x="450" y="210" text-anchor="middle" font-size="10" fill="#666">limit checks</text>
+  <text x="540" y="210" text-anchor="middle" font-size="10" fill="#666">build msg</text>
+  <text x="630" y="210" text-anchor="middle" font-size="10" fill="#666">to wire</text>
+
+  <!-- Total budget -->
+  <line x1="50" y1="260" x2="670" y2="260" stroke="#444" stroke-width="1"/>
+  <line x1="50" y1="255" x2="50" y2="265" stroke="#444"/>
+  <line x1="670" y1="255" x2="670" y2="265" stroke="#444"/>
+  <text x="360" y="252" text-anchor="middle" font-size="12" fill="#444" font-weight="600">total tick-to-trade budget: roughly 5-10 µs in modern systems</text>
+  <text x="360" y="285" text-anchor="middle" font-size="11" fill="#666">(numbers are approximate and vary wildly by venue, hardware, and strategy)</text>
+</svg>
