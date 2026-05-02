@@ -54,6 +54,12 @@
           "title": "Lock-free FIFOs (Frasch, CppCon 2023) + Robust IPC Queues (Hagins, C++ on Sea 2025)",
           "date": "2025-10-04",
           "path": "blog/talks/lock-free-and-ipc-queues.md"
+        },
+        {
+          "slug": "three-cool-things-cpp26",
+          "title": "Three Cool Things in C++26 (Herb Sutter, C++ on Sea 2025)",
+          "date": "2026-01-02",
+          "path": "blog/talks/three-cool-things-cpp26.md"
         }
       ]
     }

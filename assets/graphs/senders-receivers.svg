@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="220" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">std::execution: senders compose into pipelines</text>
+
+  <!-- four boxes -->
+  <g>
+    <rect x="40" y="74" width="130" height="52" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="105" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">just(42)</text>
+    <text x="105" y="116" text-anchor="middle" font-size="11" fill="#666">source sender</text>
+
+    <rect x="200" y="74" width="130" height="52" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="265" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">then(x*2)</text>
+    <text x="265" y="116" text-anchor="middle" font-size="11" fill="#666">transform</text>
+
+    <rect x="360" y="74" width="130" height="52" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+    <text x="425" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">on(scheduler)</text>
+    <text x="425" y="116" text-anchor="middle" font-size="11" fill="#666">where to run</text>
+
+    <rect x="520" y="74" width="160" height="52" rx="6" fill="#fafaf7" stroke="#d4506b" stroke-width="1.4"/>
+    <text x="600" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="#d4506b">sync_wait</text>
+    <text x="600" y="116" text-anchor="middle" font-size="11" fill="#666">consumer pulls</text>
+  </g>
+
+  <defs>
+    <marker id="arrCpp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- arrows -->
+  <line x1="170" y1="100" x2="198" y2="100" stroke="#888" stroke-width="1.5" marker-end="url(#arrCpp)"/>
+  <line x1="330" y1="100" x2="358" y2="100" stroke="#888" stroke-width="1.5" marker-end="url(#arrCpp)"/>
+  <line x1="490" y1="100" x2="518" y2="100" stroke="#888" stroke-width="1.5" marker-end="url(#arrCpp)"/>
+
+  <!-- caption -->
+  <text x="360" y="158" text-anchor="middle" font-size="11" fill="#666">the chain is lazy: nothing runs until the consumer asks for the value</text>
+  <text x="360" y="176" text-anchor="middle" font-size="11" fill="#666">no implicit heap allocation, scheduler controls placement of each step</text>
+  <text x="360" y="200" text-anchor="middle" font-size="10" fill="#888">replaces the std::async / std::future / hand-rolled-thread-pool pile with one composable model</text>
+</svg>
