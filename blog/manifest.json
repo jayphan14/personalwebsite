@@ -60,6 +60,12 @@
           "title": "Three Cool Things in C++26 (Herb Sutter, C++ on Sea 2025)",
           "date": "2026-01-02",
           "path": "blog/talks/three-cool-things-cpp26.md"
+        },
+        {
+          "slug": "cpp-rvo-takeaways",
+          "title": "C++ RVO Takeaways (Michelle Fae D'Souza)",
+          "date": "2026-04-25",
+          "path": "blog/talks/cpp-rvo-takeaways.md"
         }
       ]
     }
