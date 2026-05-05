@@ -68,6 +68,17 @@
           "path": "blog/talks/cpp-rvo-takeaways.md"
         }
       ]
+    },
+    {
+      "title": "Building Things From Scratch",
+      "posts": [
+        {
+          "slug": "building-database-engine",
+          "title": "Building a Database Engine",
+          "date": "2026-05-01",
+          "path": "blog/projects/building-database-engine.md"
+        }
+      ]
     }
   ]
 }
