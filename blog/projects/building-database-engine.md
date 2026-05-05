@@ -1,6 +1,8 @@
-I built [database_engine](https://github.com/jayphan14/database_engine) to learn how databases actually work. Not by reading textbook chapters, but by writing the layers myself, bottom up. It is a disk-backed storage engine in C++17 with a typed query language on top. The full SQL pipeline is in now: pages, buffer pool, heap file, tuple codec, persistent catalog, parser, analyzer, planner, executor.
+I built [database_engine](https://github.com/jayphan14/database_engine) to learn how databases actually work. I have taken a database class, read books and PostgreSQL source code but I still think that's there are learning values in building this myself (also with the help of an agent, another topic I will talk about another day).
 
-The thing I am most proud of is the cold-restart demo. Insert rows. Close the file. Re-open it with a fresh BufferPool and a fresh Catalog. The catalog rebuilds itself from two hardcoded system pages, and the same SELECT runs again over the same data. Until that demo worked, I did not believe I had built a database. I had built a fancy in-memory cache.
+It is a disk-backed storage engine in C++17 with a typed query language on top. The full end to end SQL pipeline is shipped now: pages, buffer pool, heap file, tuple codec, persistent catalog, parser, analyzer, planner, executor. It shows me more or less the architechture and key challenges of building a DBMS.
+
+My aha moment is cold-restart demo. Insert rows. Close the file. Re-open it with a fresh BufferPool and a fresh Catalog. The catalog rebuilds itself from two hardcoded system pages, and the same SELECT runs again over the same data. Until that demo worked, I did not believe I had built a database. I had built a fancy in-memory cache.
 
 ## The architecture
 
