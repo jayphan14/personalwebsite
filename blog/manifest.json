@@ -73,6 +73,12 @@
       "title": "Building Things From Scratch",
       "posts": [
         {
+          "slug": "building-game-engine",
+          "title": "Building a Game Engine",
+          "date": "2024-12-22",
+          "path": "blog/projects/building-game-engine.md"
+        },
+        {
           "slug": "building-database-engine",
           "title": "Building a Database Engine",
           "date": "2026-05-01",
