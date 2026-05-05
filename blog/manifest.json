@@ -83,6 +83,12 @@
           "title": "Building a Database Engine",
           "date": "2026-05-01",
           "path": "blog/projects/building-database-engine.md"
+        },
+        {
+          "slug": "building-cpp-compiler",
+          "title": "Building a C++ Compiler (WLP4 to MIPS)",
+          "date": "2026-05-05",
+          "path": "blog/projects/building-cpp-compiler.md"
         }
       ]
     }
