@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 760" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="760" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">query processing: one IR per stage</text>
+  <text x="360" y="44" text-anchor="middle" font-size="11" fill="#666">SELECT name FROM users WHERE age &gt; 18</text>
+
+  <defs>
+    <marker id="arrQ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- 1. SQL string (input) -->
+  <rect x="160" y="62" width="400" height="50" rx="6" fill="#ffffff" stroke="#444" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <text x="180" y="80" font-size="11" font-weight="600" fill="#666">INPUT — SQL string</text>
+  <text x="180" y="100" font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">"SELECT name FROM users WHERE age &gt; 18"</text>
+
+  <!-- arrow + Parser stage -->
+  <line x1="360" y1="112" x2="360" y2="138" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+  <rect x="280" y="138" width="160" height="28" rx="4" fill="#0b6d5a"/>
+  <text x="360" y="157" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Parser</text>
+  <text x="450" y="156" font-size="10" fill="#888">tokenize + recursive descent</text>
+  <line x1="360" y1="166" x2="360" y2="192" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+
+  <!-- 2. SelectQuery -->
+  <rect x="120" y="192" width="480" height="100" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="140" y="210" font-size="11" font-weight="600" fill="#0b6d5a">SelectQuery — string-based AST</text>
+  <text x="140" y="232" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">table   = "users"</text>
+  <text x="140" y="250" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">columns = ["name"]</text>
+  <text x="140" y="268" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">where   = { column: "age", op: Gt, value: "18" }</text>
+  <text x="140" y="286" font-size="10" fill="#888">everything is still text; nothing has been resolved or type-checked yet</text>
+
+  <!-- arrow + Analyzer stage -->
+  <line x1="360" y1="292" x2="360" y2="318" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+  <rect x="280" y="318" width="160" height="28" rx="4" fill="#0b6d5a"/>
+  <text x="360" y="337" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Analyzer</text>
+  <text x="450" y="336" font-size="10" fill="#888">resolve names against Catalog, type-check</text>
+  <line x1="360" y1="346" x2="360" y2="372" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+
+  <!-- 3. BoundSelect -->
+  <rect x="120" y="372" width="480" height="116" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="140" y="390" font-size="11" font-weight="600" fill="#0b6d5a">BoundSelect — numeric indices + types</text>
+  <text x="140" y="412" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">from_tables = [users_info]</text>
+  <text x="140" y="430" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">select_list = [ColumnRef{0, 1, Text}]            // name</text>
+  <text x="140" y="448" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">where = BinaryOp{Gt,</text>
+  <text x="140" y="464" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">                 ColumnRef{0, 2, Int32},  Literal{18, Int32}}</text>
+  <text x="140" y="482" font-size="10" fill="#888">strings replaced by (table_index, column_index); every node carries result_type</text>
+
+  <!-- arrow + Planner stage -->
+  <line x1="360" y1="488" x2="360" y2="514" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+  <rect x="280" y="514" width="160" height="28" rx="4" fill="#0b6d5a"/>
+  <text x="360" y="533" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Planner</text>
+  <text x="450" y="532" font-size="10" fill="#888">1:1 lowering to operator tree</text>
+  <line x1="360" y1="542" x2="360" y2="568" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+
+  <!-- 4. PlanNode tree -->
+  <rect x="120" y="568" width="480" height="80" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="140" y="586" font-size="11" font-weight="600" fill="#0b6d5a">PlanNode tree — Volcano operators</text>
+  <text x="140" y="608" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">Filter(age &gt; 18)</text>
+  <text x="140" y="624" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">  └── SeqScan(users)</text>
+  <text x="140" y="642" font-size="10" fill="#888">each node implements open() / next() / close()</text>
+
+  <!-- arrow + Executor stage -->
+  <line x1="360" y1="648" x2="360" y2="674" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+  <rect x="280" y="674" width="160" height="28" rx="4" fill="#0b6d5a"/>
+  <text x="360" y="693" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">Executor</text>
+  <text x="450" y="692" font-size="10" fill="#888">drive operators, project SELECT list</text>
+  <line x1="360" y1="702" x2="360" y2="728" stroke="#888" stroke-width="1.5" marker-end="url(#arrQ)"/>
+
+  <!-- 5. ExecResult (output) -->
+  <rect x="160" y="728" width="400" height="24" rx="6" fill="#ffffff" stroke="#444" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <text x="180" y="744" font-size="11" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">OUTPUT — ExecResult: [["alice"], ["carol"], ["eve"]]</text>
+</svg>

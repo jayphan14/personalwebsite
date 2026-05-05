@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="720" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">storage layout: what's in RAM, what's on disk</text>
+
+  <!-- ─── Top half: RAM ↔ Disk ─── -->
+
+  <!-- RAM column -->
+  <text x="60" y="64" font-size="11" font-weight="600" fill="#0b6d5a" letter-spacing="0.5">RAM — BufferPool</text>
+  <rect x="60" y="74" width="280" height="270" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+
+  <!-- BufferPool frames -->
+  <text x="74" y="94" font-size="10" fill="#666">fixed array of frames, LRU eviction</text>
+
+  <!-- Frame 0 -->
+  <rect x="74" y="104" width="252" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="84" y="120" font-size="11" font-weight="600" fill="#333">frame 0</text>
+  <text x="84" y="136" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">page_id = 2  (users)</text>
+  <text x="84" y="150" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">pin_count = 1   dirty = true</text>
+
+  <!-- Frame 1 -->
+  <rect x="74" y="158" width="252" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="84" y="174" font-size="11" font-weight="600" fill="#333">frame 1</text>
+  <text x="84" y="190" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">page_id = 0  (__tables)</text>
+  <text x="84" y="204" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">pin_count = 0   dirty = false</text>
+
+  <!-- Frame 2 -->
+  <rect x="74" y="212" width="252" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="84" y="228" font-size="11" font-weight="600" fill="#333">frame 2</text>
+  <text x="84" y="244" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">page_id = 3  (posts)</text>
+  <text x="84" y="258" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">pin_count = 0   dirty = false</text>
+
+  <!-- Frame 3 (free) -->
+  <rect x="74" y="266" width="252" height="50" rx="4" fill="#ffffff" stroke="#888" stroke-dasharray="3 3"/>
+  <text x="84" y="282" font-size="11" font-weight="600" fill="#888">frame 3</text>
+  <text x="84" y="298" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#888">empty (LRU victim slot)</text>
+
+  <text x="74" y="334" font-size="10" fill="#666" font-style="italic">PageGuard (RAII) increments pin on borrow,</text>
+  <text x="74" y="346" font-size="10" fill="#666" font-style="italic">marks dirty on write, decrements on drop.</text>
+
+  <!-- Arrows between RAM and Disk -->
+  <defs>
+    <marker id="arrSL" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <line x1="345" y1="180" x2="380" y2="180" stroke="#888" stroke-width="1.5" marker-end="url(#arrSL)"/>
+  <text x="362" y="172" text-anchor="middle" font-size="10" fill="#666">read</text>
+  <line x1="380" y1="220" x2="345" y2="220" stroke="#888" stroke-width="1.5" marker-end="url(#arrSL)"/>
+  <text x="362" y="240" text-anchor="middle" font-size="10" fill="#666">write</text>
+
+  <!-- DISK column -->
+  <text x="385" y="64" font-size="11" font-weight="600" fill="#0b6d5a" letter-spacing="0.5">DISK — one OS file (4 KiB pages)</text>
+  <rect x="385" y="74" width="275" height="270" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="399" y="94" font-size="10" fill="#666">page N at byte offset N × 4096</text>
+
+  <!-- Pages on disk -->
+  <rect x="399" y="104" width="247" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="409" y="120" font-size="11" font-weight="600" fill="#333">page 0 — __tables</text>
+  <text x="409" y="136" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">(table_id, name, root_page) rows</text>
+  <text x="409" y="150" font-size="10" fill="#888">system catalog, hardcoded location</text>
+
+  <rect x="399" y="158" width="247" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="409" y="174" font-size="11" font-weight="600" fill="#333">page 1 — __columns</text>
+  <text x="409" y="190" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">(table_id, pos, name, type, null) rows</text>
+  <text x="409" y="204" font-size="10" fill="#888">system catalog, hardcoded location</text>
+
+  <rect x="399" y="212" width="247" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="409" y="228" font-size="11" font-weight="600" fill="#333">page 2 — users (root)</text>
+  <text x="409" y="244" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">user tuples; chain via next_page_id</text>
+
+  <rect x="399" y="266" width="247" height="50" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="409" y="282" font-size="11" font-weight="600" fill="#333">page 3 — posts (root)</text>
+  <text x="409" y="298" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">post tuples; chain via next_page_id</text>
+
+  <text x="399" y="334" font-size="10" fill="#666" font-style="italic">cold-open: read pages 0 and 1, rebuild</text>
+  <text x="399" y="346" font-size="10" fill="#666" font-style="italic">every TableInfo. No external manifest.</text>
+
+  <!-- Divider -->
+  <line x1="60" y1="380" x2="660" y2="380" stroke="#ddd" stroke-width="1"/>
+  <text x="360" y="402" text-anchor="middle" font-size="11" font-weight="600" fill="#0b6d5a" letter-spacing="0.5">ZOOM — one 4 KiB SlottedPage</text>
+
+  <!-- ─── Bottom half: zoom on slotted page ─── -->
+
+  <!-- Slotted page diagram -->
+  <rect x="120" y="420" width="480" height="240" rx="6" fill="#ffffff" stroke="#0b6d5a" stroke-width="1.4"/>
+
+  <!-- Header -->
+  <rect x="120" y="420" width="480" height="34" fill="#eaf3f0" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="132" y="441" font-size="11" font-weight="600" fill="#0b6d5a">header</text>
+  <text x="590" y="441" text-anchor="end" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#666">~16 B: page_id, next_page_id, slot_count, free_offset</text>
+
+  <!-- Slot directory -->
+  <rect x="120" y="454" width="480" height="50" fill="#ffffff" stroke="#0b6d5a" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="132" y="473" font-size="11" font-weight="600" fill="#0b6d5a">slot directory  →  grows down</text>
+  <text x="132" y="492" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">slot[0]=(off,len)  slot[1]=(off,len)  slot[2]=TOMBSTONE  slot[3]=(off,len)</text>
+
+  <!-- Free space -->
+  <rect x="120" y="504" width="480" height="60" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="360" y="538" text-anchor="middle" font-size="12" fill="#888" font-style="italic">free space</text>
+
+  <!-- Tuples -->
+  <rect x="120" y="564" width="480" height="60" fill="#ffffff" stroke="#0b6d5a" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="132" y="583" font-size="11" font-weight="600" fill="#0b6d5a">tuple bytes  ←  grow up</text>
+  <text x="132" y="602" font-size="10" font-family="ui-monospace, Menlo, Consolas, monospace" fill="#333">tuple3 | tuple1 | tuple0</text>
+  <text x="132" y="618" font-size="10" fill="#666">encoded by TupleCodec; slot[i] points at tuple i (or tombstone)</text>
+
+  <!-- Footer caption -->
+  <text x="360" y="676" text-anchor="middle" font-size="10" fill="#888">slot ids are stable across compaction. removed slots become tombstones; later inserts may reuse them.</text>
+  <text x="360" y="694" text-anchor="middle" font-size="10" fill="#888">a HeapFile is just a chain of pages like this, linked by next_page_id.</text>
+</svg>

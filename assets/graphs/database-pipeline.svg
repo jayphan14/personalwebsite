@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="620" fill="#ffffff"/>
+
+  <text x="360" y="26" text-anchor="middle" font-size="13" font-weight="600" fill="#333">database_engine: layers from SQL down to disk</text>
+
+  <!-- Section header: SQL pipeline -->
+  <line x1="60" y1="58" x2="140" y2="58" stroke="#0b6d5a" stroke-width="1"/>
+  <text x="148" y="62" font-size="11" font-weight="600" fill="#0b6d5a" letter-spacing="0.5">SQL PIPELINE</text>
+  <line x1="240" y1="58" x2="660" y2="58" stroke="#0b6d5a" stroke-width="1"/>
+
+  <!-- Parser -->
+  <rect x="80" y="72" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="95" font-size="13" font-weight="600" fill="#0b6d5a">Parser</text>
+  <text x="620" y="95" text-anchor="end" font-size="11" fill="#666">SQL chars → SelectQuery (string AST)</text>
+
+  <!-- Analyzer -->
+  <rect x="80" y="118" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="141" font-size="13" font-weight="600" fill="#0b6d5a">Analyzer</text>
+  <text x="620" y="141" text-anchor="end" font-size="11" fill="#666">SelectQuery → BoundSelect (resolved against Catalog)</text>
+
+  <!-- Planner -->
+  <rect x="80" y="164" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="187" font-size="13" font-weight="600" fill="#0b6d5a">Planner</text>
+  <text x="620" y="187" text-anchor="end" font-size="11" fill="#666">BoundSelect → PlanNode tree (1:1 lowering today)</text>
+
+  <!-- Executor -->
+  <rect x="80" y="210" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="233" font-size="13" font-weight="600" fill="#0b6d5a">Executor</text>
+  <text x="620" y="233" text-anchor="end" font-size="11" fill="#666">Volcano open / next / close, projects → ExecResult</text>
+
+  <!-- Section header: Storage -->
+  <line x1="60" y1="278" x2="140" y2="278" stroke="#0b6d5a" stroke-width="1"/>
+  <text x="148" y="282" font-size="11" font-weight="600" fill="#0b6d5a" letter-spacing="0.5">STORAGE</text>
+  <line x1="208" y1="278" x2="660" y2="278" stroke="#0b6d5a" stroke-width="1"/>
+
+  <!-- Catalog -->
+  <rect x="80" y="292" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="315" font-size="13" font-weight="600" fill="#0b6d5a">Catalog</text>
+  <text x="620" y="315" text-anchor="end" font-size="11" fill="#666">two system heap files at pages 0 and 1, bootstraps on open</text>
+
+  <!-- Tuple codec -->
+  <rect x="80" y="338" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="361" font-size="13" font-weight="600" fill="#0b6d5a">Tuple codec</text>
+  <text x="620" y="361" text-anchor="end" font-size="11" fill="#666">typed Values ↔ raw bytes (schema-aware)</text>
+
+  <!-- HeapFile -->
+  <rect x="80" y="384" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="407" font-size="13" font-weight="600" fill="#0b6d5a">HeapFile</text>
+  <text x="620" y="407" text-anchor="end" font-size="11" fill="#666">chain of slotted pages linked by next_page_id</text>
+
+  <!-- SlottedPage -->
+  <rect x="80" y="430" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="453" font-size="13" font-weight="600" fill="#0b6d5a">SlottedPage</text>
+  <text x="620" y="453" text-anchor="end" font-size="11" fill="#666">one 4 KiB page: header + slot dir + tuples</text>
+
+  <!-- BufferPool -->
+  <rect x="80" y="476" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="499" font-size="13" font-weight="600" fill="#0b6d5a">BufferPool</text>
+  <text x="620" y="499" text-anchor="end" font-size="11" fill="#666">LRU page cache, pin / dirty bits, RAII PageGuard</text>
+
+  <!-- DiskManager -->
+  <rect x="80" y="522" width="560" height="36" rx="4" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="100" y="545" font-size="13" font-weight="600" fill="#0b6d5a">DiskManager</text>
+  <text x="620" y="545" text-anchor="end" font-size="11" fill="#666">raw page I/O, page N at byte offset N × 4096</text>
+
+  <defs>
+    <marker id="arrDb2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <line x1="360" y1="558" x2="360" y2="582" stroke="#888" stroke-width="1.5" marker-end="url(#arrDb2)"/>
+
+  <text x="360" y="600" text-anchor="middle" font-size="11" fill="#444" font-style="italic">one OS file holds all durable state</text>
+</svg>
