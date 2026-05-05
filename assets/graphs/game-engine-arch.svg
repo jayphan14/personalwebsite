@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="100%" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="720" height="420" fill="#ffffff"/>
+
+  <text x="360" y="24" text-anchor="middle" font-size="13" font-weight="600" fill="#333">2D game engine: how the pieces fit together</text>
+
+  <!-- Engine (top centre) -->
+  <rect x="280" y="50" width="160" height="56" rx="6" fill="#0b6d5a" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="360" y="74" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">Engine</text>
+  <text x="360" y="92" text-anchor="middle" font-size="11" fill="#cfeae0">input → update → draw</text>
+
+  <!-- Three subsystems -->
+  <rect x="60" y="160" width="150" height="56" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="135" y="184" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Display</text>
+  <text x="135" y="202" text-anchor="middle" font-size="11" fill="#666">draws the world</text>
+
+  <rect x="285" y="160" width="150" height="56" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="360" y="184" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Input</text>
+  <text x="360" y="202" text-anchor="middle" font-size="11" fill="#666">keyboard / mouse</text>
+
+  <rect x="510" y="160" width="150" height="56" rx="6" fill="#fafaf7" stroke="#0b6d5a" stroke-width="1.4"/>
+  <text x="585" y="184" text-anchor="middle" font-size="13" font-weight="600" fill="#0b6d5a">Characters</text>
+  <text x="585" y="202" text-anchor="middle" font-size="11" fill="#666">things in the world</text>
+
+  <defs>
+    <marker id="arrGE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+    <marker id="arrGEr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d4506b"/>
+    </marker>
+  </defs>
+
+  <!-- Engine to subsystems -->
+  <line x1="320" y1="106" x2="160" y2="158" stroke="#888" stroke-width="1.2" marker-end="url(#arrGE)"/>
+  <line x1="360" y1="106" x2="360" y2="158" stroke="#888" stroke-width="1.2" marker-end="url(#arrGE)"/>
+  <line x1="400" y1="106" x2="560" y2="158" stroke="#888" stroke-width="1.2" marker-end="url(#arrGE)"/>
+
+  <!-- Two character types under Characters -->
+  <rect x="490" y="250" width="90" height="40" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="535" y="274" text-anchor="middle" font-size="12" fill="#333">Rectangle</text>
+
+  <rect x="600" y="250" width="90" height="40" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="645" y="274" text-anchor="middle" font-size="12" fill="#333">BitMap</text>
+
+  <line x1="560" y1="216" x2="535" y2="248" stroke="#888" stroke-width="1.2" marker-end="url(#arrGE)"/>
+  <line x1="610" y1="216" x2="645" y2="248" stroke="#888" stroke-width="1.2" marker-end="url(#arrGE)"/>
+
+  <!-- Movement strategies -->
+  <rect x="60" y="320" width="600" height="80" rx="6" fill="#fafaf7" stroke="#d4506b" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="360" y="344" text-anchor="middle" font-size="13" font-weight="600" fill="#d4506b">Movement (strategy: each Character holds one)</text>
+  <text x="360" y="364" text-anchor="middle" font-size="11" fill="#666">UserInput &nbsp;·&nbsp; StraightLine &nbsp;·&nbsp; BounceOff &nbsp;·&nbsp; PassThrough &nbsp;·&nbsp; Hide / Unhide</text>
+  <text x="360" y="384" text-anchor="middle" font-size="10" fill="#888">composition, not inheritance: any character can swap movement at runtime</text>
+
+  <!-- Connection from characters down to movement -->
+  <line x1="535" y1="290" x2="370" y2="318" stroke="#d4506b" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arrGEr)"/>
+  <line x1="645" y1="290" x2="500" y2="318" stroke="#d4506b" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arrGEr)"/>
+</svg>
