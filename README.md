@@ -19,18 +19,23 @@ Any static server works (`npx serve .`, `caddy file-server`, etc.).
 ```
 index.html          About page
 blog.html           Blog index (groups posts by section)
-article.html        Article viewer — reads ?slug=<slug> and loads the MD
+article.html        Article viewer, reads ?slug=<slug> and loads the MD
 css/style.css
 js/blog-index.js
 js/article.js       Parses markdown + renders $…$ / $$…$$ math via KaTeX
 blog/
   manifest.json     Registry of sections and posts
-  ml/               One folder per section (convention, not required)
-    why-squared-error.md
+  ml/               Machine Learning posts
+  books/            Book Reviews posts
+  talks/            C++ Talk Summary and Review posts
+  projects/         Building Things From Scratch posts
 assets/
-  profile.jpg       Your LinkedIn photo (drop it in — see assets/README.md)
+  profile.jpg       LinkedIn photo
   profile-placeholder.svg
+  graphs/           Inline SVG diagrams referenced from posts
 ```
+
+Folder names under `blog/` are convention only. The `path` field in `manifest.json` is what actually drives loading.
 
 ## Writing a new article
 
@@ -57,6 +62,8 @@ assets/
    ```json
    { "title": "Software", "posts": [ ... ] }
    ```
+
+   Existing sections so far: Machine Learning, Book Reviews, C++ Talk Summary and Review, Building Things From Scratch.
 
 ## Writing markdown
 
